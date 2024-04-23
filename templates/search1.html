@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block head %}
+<title>Search Bonds Encashed by Political Parties</title>{% endblock %} {% block
+body %}
+
+<div class="search_query">
+  <form method="post" action="/search_table1">
+    <label>Select a Column:</label>
+    <select name="column" id="column">
+      <option value="Date_of_Encashment">Date of Encashment</option>
+      <option value="Name of the Political Party">
+        Name of the Political Party
+      </option>
+      <option value="Prefix">Prefix</option>
+      <option value="Bond_Number">Bond Number</option>
+      <option value="Denominations">Denominations</option>
+      <option
+        value="Pay Branch
+        Code"
+      >
+        Pay Branch Code
+      </option>
+      <option value="Pay_Teller">Pay Teller</option>
+    </select>
+    <br /><br />
+
+    <label>Enter Valid Column Value:</label>
+    <input name="column_value" type="text" id="column_value" />
+    <br /><br />
+
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/search_table1" method="clear">
+    <button type="submit">Clear</button>
+  </form>
+
+  <form action="/" method="home">
+    <button type="submit">Home</button>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block head %}
+<title>Search Bonds Purchased by Individuals and Companies</title> {% endblock
+%} {% block body %}
+
+<div class="search_query">
+  <form method="post" action="/search_table2">
+    <label>Select a Column:</label>
+    <select name="column" id="column">
+      <option value="Reference_No_(URN)">Reference No(URN)</option>
+      <option value="Journal_Date">Journal Date</option>
+      <option value="Date_of_Purchase">Date of Purchase</option>
+      <option value="Date_of_Expiry">Date of Expiry</option>
+      <option value="Name_of_the_Purchaser">Name of the Purchaser</option>
+      <option value="Prefix">Prefix</option>
+      <option value="Bond_Number">Bond Number</option>
+      <option value="Denominations">Denominations</option>
+      <option value="Issue_Branch_Code">Issue Branch Code</option>
+      <option value="Issue Teller">Issue Teller</option>
+    </select>
+    <br /><br />
+
+    <label>Enter Valid Column Value:</label>
+    <input name="column_value" type="text" id="column_value" />
+    <br /><br />
+
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/search_table1" method="clear">
+    <button type="submit">Clear</button>
+  </form>
+
+  <form action="/" method="home">
+    <button type="submit">Home</button>
+  </form>
+</div>
+
+{% endblock %}

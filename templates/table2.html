@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block head %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/table.css') }}"
+/>
+<title>Search Results</title>
+{% endblock %} {% block body %}
+
+<div class="table-container">
+  <h3>Bonds purchased by individuals and companies</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Sr No.</th>
+        <th>Reference No (URN)</th>
+        <th>Journal Date</th>
+        <th>Date of Purchase</th>
+        <th>Date of Expiry</th>
+        <th>Name of the Purchaser</th>
+        <th>Prefix</th>
+        <th>Bond Number</th>
+        <th>Denominations</th>
+        <th>Issue Branch Code</th>
+        <th>Issue Teller</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <th>{{row[0]}}</th>
+        <th>{{row[1]}}</th>
+        <th>{{row[2]}}</th>
+        <th>{{row[3]}}</th>
+        <th>{{row[4]}}</th>
+        <th>{{row[5]}}</th>
+        <th>{{row[6]}}</th>
+        <th>{{row[7]}}</th>
+        <th>{{row[8]}}</th>
+        <th>{{row[9]}}</th>
+        <th>{{row[10]}}</th>
+        <th>{{row[11]}}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block head %} {% endblock %} {% block body %}
+
+<div class="political_party_search">
+  <form method="post" action="/political_party">
+    <label>Select a Individual/Company:</label>
+    <select name="party_name" id="party_name">
+      {% for row in party_names %}
+      <option value="{{row[0]}}">{{row[0]}}</option>
+      {% endfor %}
+    </select>
+    <br /><br />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/political_party" method="clear">
+    <button type="submit">Clear</button>
+  </form>
+
+  <form action="/" method="home">
+    <button type="submit">Home</button>
+  </form>
+</div>
+
+{% endblock %}

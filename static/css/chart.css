@@ -1,0 +1,11 @@
+.main_body {
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+
+.side_bar {
+  background-color: Red;
+  color: Black;
+  width: 40%;
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index_style.css') }}"
+/>
+<title>Electoral Bond Data</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <h1>DCC ASSIGNMENT 4</h1>
+  <h2>BY LAKSH JAIN</h2>
+
+  <ul class="links">
+    <li>
+      <a href="http://127.0.0.1:5000/search_table1"
+        >Search Bonds Encashed by Political Parties</a
+      >
+    </li>
+    <li>
+      <a href="http://127.0.0.1:5000/search_table2"
+        >Search Bonds Purchased by Individuals and Companies</a
+      >
+    </li>
+    <li>
+      <a href="http://127.0.0.1:5000/bond_value"
+        >Total Value of Bonds Purchased by Individual/Companies</a
+      >
+    </li>
+    <li>
+      <a href="http://127.0.0.1:5000/political_party"
+        >Total Value of Bonds acquired by a Political Party</a
+      >
+    </li>
+    <li>
+      <a href="http://127.0.0.1:5000/chart"
+        >Pie Chart depicting the total amount of donations to all the
+        parties.</a
+      >
+    </li>
+  </ul>
+</div>
+{% endblock %}

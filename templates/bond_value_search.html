@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block head %} {% endblock %} {% block body %}
+
+<div class="bond_value_search">
+  <form method="post" action="/bond_value">
+    <label>Select a Individual/Company:</label>
+    <select name="company_name" id="company_name">
+      {% for row in company_names %}
+      <option value="{{row[0]}}">{{row[0]}}</option>
+      {% endfor %}
+    </select>
+    <br /><br />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/bond_value" method="clear">
+    <button type="submit">Clear</button>
+  </form>
+
+  <form action="/" method="home">
+    <button type="submit">Home</button>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/table.css') }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/bar_chart.css') }}"
+/>
+
+<title>Search Results</title>
+
+{% endblock %} {% block body %}
+
+<div class="table-container">
+  <h3>Bond Information for {{ name }}</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Number of Bonds</th>
+        <th>Denomination</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <th>{{row[0]}}</th>
+        <th>{{row[1]}}</th>
+        <th>{{row[2]}}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br /><br />
+  <table>
+    <tr>
+      <th>No. of bonds aquired</th>
+      <th>{{ count[0][0] }}</th>
+    </tr>
+    <tr>
+      <th>Total value of Bonds</th>
+      <th>{{ value[0][0] }}</th>
+    </tr>
+  </table>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<div class="main_body">
+  <h1>Bar Plot</h1>
+  <center>
+    <h3>Year vs No. of bonds received in that year</h3>
+    <button onclick="saveChart('png')">Save as PNG</button>
+    <button onclick="saveChart('jpeg')">Save as JPEG</button>
+  </center>
+  <center>
+    <div>
+      <canvas id="bar_chart"></canvas>
+    </div>
+  </center>
+
+  <script>
+    const xValues = {{ xaxis|safe }};
+    const yValues = {{ yaxis|safe }};
+
+    const barChart = new Chart("bar_chart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            backgroundColor: "#FFC0CB",
+            borderColor: "#FFFFFF",
+            data: yValues,
+            label: "No. of bonds received",
+          },
+        ],
+      },
+      options: {
+        scales: {
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Year",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "No. of bonds received",
+              },
+            },
+          ],
+        },
+      },
+    });
+
+    function saveChart(fileType) {
+      const dataURL = barChart.toBase64Image(`image/${fileType}`, 1.0);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = dataURL;
+      downloadLink.download = `chart.${fileType}`;
+      downloadLink.click();
+    }
+  </script>
+</div>
+
+{% endblock %}

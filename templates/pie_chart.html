@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/pie_chart.css') }}"
+  />
+  <title>Pie Chart</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <div class="main_body">
+    <center><h1>Total Donations to all Political Parties</h1></center>
+    <div class="button-container">
+      <button onclick="saveChart('png')">Save as PNG</button>
+      <button onclick="saveChart('jpeg')">Save as JPEG</button>
+    </div>
+    <div>
+      <canvas id="pie_chart"></canvas>
+    </div>
+
+    <script>
+      const party_name = {{ party|tojson }};
+      const Vals = {{ money|tojson }};
+
+      // Generate dynamic background colors for each data point
+      const backgroundColors = [];
+      for (let i = 0; i < Vals.length; i++) {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        backgroundColors.push(`rgb(${r}, ${g}, ${b})`);
+      }
+
+      const pieChart = new Chart("pie_chart", {
+        type: "pie",
+        data: {
+          labels: party_name,
+          datasets: [
+            {
+              borderColor: 0,
+              data: Vals,
+              backgroundColor: backgroundColors,
+              hoverOffset: 5,
+            },
+          ],
+        },
+      });
+
+      function saveChart(fileType) {
+        const dataURL = pieChart.toBase64Image(`image/${fileType}`, 1.0);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = dataURL;
+        downloadLink.download = `pie_chart.${fileType}`;
+        downloadLink.click();
+      }
+    </script>
+  </div>
+</body>
